@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catch the Box Game</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: #111;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    #gameArea {
+      position: relative;
+      width: 400px;
+      height: 400px;
+      background: #222;
+      border: 3px solid #fff;
+      overflow: hidden;
+    }
+    #box {
+      width: 50px;
+      height: 50px;
+      background: red;
+      position: absolute;
+      top: 50px;
+      left: 50px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    #score {
+      margin-top: 20px;
+      font-size: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎯 Catch the Box</h1>
+  <div id="gameArea">
+    <div id="box"></div>
+  </div>
+  <div id="score">Score: 0</div>
+
+  <script>
+    const box = document.getElementById('box');
+    const scoreEl = document.getElementById('score');
+    let score = 0;
+
+    function moveBox() {
+      const gameArea = document.getElementById('gameArea');
+      const maxX = gameArea.clientWidth - box.clientWidth;
+      const maxY = gameArea.clientHeight - box.clientHeight;
+      const randX = Math.random() * maxX;
+      const randY = Math.random() * maxY;
+      box.style.left = randX + 'px';
+      box.style.top = randY + 'px';
+    }
+
+    box.addEventListener('click', () => {
+      score++;
+      scoreEl.textContent = `Score: ${score}`;
+      moveBox();
+    });
+
+    // Move the box initially
+    moveBox();
+  </script>
+</body>
+</html>
